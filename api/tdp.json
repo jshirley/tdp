@@ -1,0 +1,109 @@
+{
+  "apiVersion": "1",
+  "swaggerVersion": "1.1",
+  "basePath": "http://tdp.me/v1",
+  "apis": [
+    {
+      "path": "/goals/{goalId}",
+      "description": "Retrieve the goal information",
+      "operations": [
+        {
+          "httpMethod": "GET",
+          "nickname": "getGoalById",
+          "responseClass":"Goal",
+          "summary":"Find a goal by its unique ID"
+        }
+      ]
+    },
+    {
+      "path": "/goals/{goalId}/completion",
+      "description": "Goal completion information",
+      "operations": [
+        {
+          "httpMethod": "GET",
+          "nickname": "getCompletionById",
+          "responseClass":"CompletedActivity",
+          "summary":"Find a completed activity by its unique ID"
+        }
+      ]
+    },
+    {
+      "path": "/goals/{goalId}/focus/{focusId}",
+      "description": "Goal focus information (renaming goals for a set period of time)",
+      "operations": [
+        {
+          "httpMethod": "GET",
+          "nickname": "getFocusById",
+          "responseClass":"GoalFocus",
+          "summary":"Find a goal focus by its unique ID"
+        }
+      ]
+    },
+    {
+      "path": "/goals/{goalId}/timerule/{timeruleID}",
+      "description": "Goal time rule set information (when to be done or not done)",
+      "operations": [
+        {
+          "httpMethod": "GET",
+          "nickname": "getTimeRuleById",
+          "responseClass":"GoalTimeRule",
+          "summary":"Find a goal time rule set by its unique ID"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "Goal": {
+      "properties": {
+        "id": {
+          "type": "long", "required": true, "description": "unique identifier for the goal"
+        },
+        "name": {
+          "type": "string", "required": true, "description": "description of the goal"
+        },
+        "description": {
+          "type": "string", "required": false, "description": "description of the goal"
+        },
+        "color": {
+          "type": "string", "required": false, "description": "color of the goal, in rgb hex"
+        },
+        "quantity": {
+          "type": "integer", "required": true, "description": "how many times during the interval to be complete"
+        },
+        "score": {
+          "type": "integer", "required": false, "description": "integer between 0 and 100 to tally as reward points"
+        },
+        "quantity_needed": {
+          "type": "integer", "required": false, "description": "how many times it must be done to reward score"
+        },
+        "frequency": {
+          "type": "integer", "required": true, "description": "sampling period in days, 7 equals one week and splits on week boundaries"
+        },
+        "cooldown": {
+          "type": "integer", "required": true, "description": "the number of days in between (if specified, overrides frequency)."
+        },
+        "active": {
+          "type": "boolean", "required": true, "description": "is the goal is active or not"
+        },
+        "public": {
+          "type": "boolean", "required": true, "description": "is the goal is visible to the public"
+        },
+        "require_note": {
+          "type": "boolean", "required": false, "description": "does this goal require a note when being completed"
+        },
+        "note_prompt": {
+          "type": "string", "required": false, "description": "what text should be displayed when the goal is prompted to be completed"
+        },
+        "position": {
+          "type": "integer", "required": false, "description": "sort order of the goal"
+        }
+      }
+    },
+    "Category": {
+    },
+    "Note": {
+    },
+    "CompletedActivity": {
+    }
+  }
+}
